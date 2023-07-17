@@ -4,56 +4,54 @@ import Form from 'react-bootstrap/Form'
 import { CustomInput } from '../custom-input/CustomInput'
 
 export const AdminSignUp = () => {
-    const inputs =[ 
-    {
-        label:'First Name',
-        name: 'fName',
-        required: true,
-        placeholder: 'Sam',
-        type: 'text',
-    },
-    {
-        label:'last Name',
-        name: 'lName',
-        required: true,
-        placeholder: 'Sam',
-        type: 'text',
-    },
-    {
-        label:'Phone',
-        name: 'phone',
-        placeholder: '0987654',
-        type: 'number',
-    },
-    {
-        label:'Address',
-        name: 'address',
-        placeholder: 'Sydney',
-        type: 'text',
-    },
-    {
-        label:'Email',
-        name: 'email',
-        required: true,
-        placeholder: 'Sam@email',
-        type: 'email',
-    },
-    {
-        label:'Password',
-        name: 'password',
-        required: true,
-        placeholder: '***********',
-        type: 'password',
-        minLength: '6'
-    },
-    {
-        label:'Confirm Password',
-        name: 'confirmPassword',
-        required: true,
-        placeholder: '***********',
-        type: 'password',
-        minLength: '6'
-    },
+    const inputs =[
+        {
+            label: "First Name",
+            name: "fName",
+            required: true,
+            type: "text",
+            placeholder: "John"
+        },
+        {
+            label: "Last Name",
+            name: "lName",
+            required: true,
+            type: "text",
+            placeholder: "Smith"
+        },
+        {
+            label: "Phone",
+            name: "phone",
+            required: true,
+            type: "tel",
+            placeholder: "987654321"
+        },
+        {
+            label: "Address",
+            name: "address",
+            required: true,
+            type: "text",
+            placeholder: "Sydney"
+        },
+        {
+            label: "Email",
+            name: "email",
+            required: true,
+            type: "email",
+            placeholder: "email@mail.com",
+        },
+        {
+            label: "Password",
+            name: "password",
+            required: true,
+            type: "password",
+        },
+        {
+            label: "Confirm Password",
+            name: "confirmPassword",
+            required: true,
+            type: "password"
+        }
       ]
 
       const [form, setForm] = useState({})
@@ -68,19 +66,23 @@ export const AdminSignUp = () => {
       }
 
       const handleOnSubmit = (e) => {
-        e.prevenDefault();
+        e.preventDefault();
+        console.log(form)
       }
+
   return (
     <div>
-        <h3>Add New Admin</h3>
-        <hr />
         <Form style={{width: "450px"}} className='m-auto border p-3 shadow-lg mt-5 rounded' onSubmit={handleOnSubmit}>
+        <h3 className="App">Add New Admin</h3>
+        <hr />
         {
             inputs.map((item, i) =>(
                 <CustomInput key={i} {...item} onChange={handleOnChange} />
             ))
         }
-         <Button variant="primary" type="Submit" >Submit</Button>   
+        <div className="d-grid mt-5">
+            <Button variant="primary" type="Submit" >Submit</Button>
+        </div>   
         </Form>
     </div>
   )
