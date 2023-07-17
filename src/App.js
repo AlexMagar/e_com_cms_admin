@@ -4,12 +4,14 @@ import {Route, Routes} from 'react-router-dom'
 import { ToastContainer } from "react-toastify";
 import {SignIn} from './pages/signin-signup/SignIn'
 import {SignUp} from './pages/signin-signup/SignUp'
+import { Home } from './pages/home/Home';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Routes>
-        <Route path="/" element={<SignIn />} />
+        <Route path='/' element={<Home />}/>
+        <Route path="/login" element={<SignIn />} />
 
         {/* Private router */}
         <Route path='/new-admin' element={<SignUp />} />
