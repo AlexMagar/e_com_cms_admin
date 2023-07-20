@@ -2,8 +2,15 @@ import React, { useState } from 'react'
 import {Button} from 'react-bootstrap'
 import Form from 'react-bootstrap/Form'
 import { CustomInput } from '../custom-input/CustomInput'
+import { postCmsAction } from '../../pages/cms/cmsAction'
+import {useDispatch} from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 export const AdminSignUp = () => {
+
+    // const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const inputs =[
         {
             label: "First Name",
@@ -63,11 +70,16 @@ export const AdminSignUp = () => {
             ...form,
             [name]: value,
         })
+
       }
 
       const handleOnSubmit = (e) => {
         e.preventDefault();
-        console.log(form)
+        if(window.confirm(`Do you want to add ${form.email} to the Database`)){
+            const isAdded = postCmsAction(form)
+            isAdded && navigate("/");
+           
+        }
       }
 
   return (
@@ -81,7 +93,7 @@ export const AdminSignUp = () => {
             ))
         }
         <div className="d-grid mt-5">
-            <Button variant="primary" type="Submit" >Submit</Button>
+            <Button variant="primary" type="submit" >Submit</Button>
         </div>   
         </Form>
     </div>
