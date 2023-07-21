@@ -16,3 +16,15 @@ export const postCms = (cmsData) =>{
         })
     }
 }
+
+export const fetchCms = async () => {
+    try {
+        const {data} = await axios.get(cmsApi);
+        return data;
+    } catch (error) {
+        return({
+            status: "error",
+            message: error.message
+        })
+    }
+}
