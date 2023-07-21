@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 
 export const AdminSignUp = () => {
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const inputs =[
@@ -76,7 +76,7 @@ export const AdminSignUp = () => {
       const handleOnSubmit = (e) => {
         e.preventDefault();
         if(window.confirm(`Do you want to add ${form.email} to the Database`)){
-            const isAdded = postCmsAction(form)
+            const isAdded = dispatch(postCmsAction(form))
             isAdded && navigate("/");
            
         }
