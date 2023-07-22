@@ -2,14 +2,10 @@ import React, { useState } from 'react'
 import {Button} from 'react-bootstrap'
 import Form from 'react-bootstrap/Form'
 import { CustomInput } from '../custom-input/CustomInput'
-import { postCmsAction } from '../../pages/cms/cmsAction'
-import {useDispatch} from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { createNewAdminAction } from '../../pages/cms/adminAction'
+import { toast } from 'react-toastify'
 
 export const AdminSignUp = () => {
-
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const inputs =[
         {
@@ -52,6 +48,7 @@ export const AdminSignUp = () => {
             name: "password",
             required: true,
             type: "password",
+            minLength: "6"
         },
         {
             label: "Confirm Password",
@@ -75,11 +72,19 @@ export const AdminSignUp = () => {
 
       const handleOnSubmit = (e) => {
         e.preventDefault();
-        if(window.confirm(`Do you want to add ${form.email} to the Database`)){
-            const isAdded = dispatch(postCmsAction(form))
-            isAdded && navigate("/");
-           
+
+        const {confirmPassword, ...rest} = form;
+        console.log(form)
+        if( confirmPassword !== rest.password){
+            return toast.error("password do not match")
         }
+        createNewAdminAction(rest);
+
+        // if(window.confirm(`Do you want to add ${form.email} to the Database`)){
+        //     const isAdded = dispatch(postCmsAction(form))
+        //     isAdded && navigate("/");
+           
+        // }
       }
 
   return (
