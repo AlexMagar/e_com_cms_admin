@@ -1,30 +1,46 @@
 import axios from 'axios'
 
-const rootApi = "http://localhost:8000"
-const cmsApi = rootApi + "/api/v1/cms"
+const rootApi = process.env.REACT_APP_ROOTAPI;
+const adminApi = rootApi + "/admin"
 
-// ========= cms ===========
-export const postCms = (cmsData) =>{
+const axiosProcessor = async ({method, url, obj}) => {
     try {
-        const { data } = axios.post(cmsApi, cmsData)
-
-        return data;
-    } catch (error) {
-        return({
-            status: "error",
-            message: error.message,
+        
+        const {data} = await axios({
+            method,
+            url,
+            data: obj
         })
+        return data
+    } catch (error) {
+        return{
+            status: 'error',
+            message: error.response ? error?.response?.data?.message : error.message,
+        }
     }
 }
 
-export const fetchCms = async () => {
-    try {
-        const {data} = await axios.get(cmsApi);
-        return data;
-    } catch (error) {
-        return({
-            status: "error",
-            message: error.message
-        })
+
+// ========= cms admin ===========
+export const postNewAdmin = (data) =>{
+    const obj = {
+        method: 'post',
+        url: adminApi,
+        obj: data
     }
+    return axiosProcessor(obj)
 }
+
+// export const fetchCms = async () => {
+//     try {
+//         const {data} = await axios.get(adminApi);
+//         return data;
+//     } catch (error) {
+//         return({
+//             status: "error",
+//             message: error.message
+//         })
+//     }
+// }
+
+
