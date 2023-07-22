@@ -55,7 +55,9 @@ export const SignIn = () => {
                 />
               ))
             }
-            <Button type='submit'>Login</Button>
+            <div className='d-grid'>
+              <Button variant="primary" type='submit'>Login</Button>
+            </div>
           </Form>
           </main>
         <Footer />
