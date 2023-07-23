@@ -1,9 +1,18 @@
 import {toast} from "react-toastify"
-import { postNewAdmin } from '../../helper/axios';
+import { postNewAdmin, updateEmailVerification } from '../../helper/axios';
 
 export const createNewAdminAction = async (obj) => {
     
-    const {status, message} = await postNewAdmin(obj)
+    const pendingResp = await postNewAdmin(obj)
 
-    toast[status](message);
+    toast.promise(pendingResp, {
+        pending: "Please await...."
+    })
+    const {status, message} = await pendingResp;
+    toast[status](message)
+}
+
+export const verifyAdminEmail = async (email, code) =>{
+    updateEmailVerification(email, code)
+    console.log(email, code)
 }

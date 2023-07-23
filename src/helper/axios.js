@@ -1,9 +1,11 @@
 import axios from 'axios'
 
 const rootApi = process.env.REACT_APP_ROOTAPI;
+
 const adminApi = rootApi + "/admin"
 
 const axiosProcessor = async ({method, url, obj}) => {
+    console.log(adminApi)
     try {
         
         const {data} = await axios({
@@ -31,16 +33,8 @@ export const postNewAdmin = (data) =>{
     return axiosProcessor(obj)
 }
 
-// export const fetchCms = async () => {
-//     try {
-//         const {data} = await axios.get(adminApi);
-//         return data;
-//     } catch (error) {
-//         return({
-//             status: "error",
-//             message: error.message
-//         })
-//     }
-// }
 
-
+// ========= email verifation =======
+export const updateEmailVerification = (email, code) =>{
+    console.log("we are in email action verification and need put method")
+}
