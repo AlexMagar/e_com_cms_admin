@@ -8,7 +8,7 @@ import { Home } from './pages/home/Home';
 import 'react-toastify/dist/ReactToastify.css';
 import { VerifyAdmin } from "./pages/verifyEmail/VerifyAdmin";
 import { Dashboard } from './pages/dashboard/Dashboard';
-import { Category } from './pages/category/Catrgory';
+import { Category } from './pages/category/Category';
 import { Product } from './pages/product/Product';
 import { PaymentOption } from './pages/payment-option/PaymentOption';
 import { Order } from './pages/order/Order';
@@ -28,7 +28,7 @@ function App() {
         {/* Private router */}
         <Route path='/new-admin' element={<SignUp />} />
         <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/catageory' element={<Category />} />
+        <Route path='/category' element={<Category />} />
         <Route path='/product' element={<Product />} />
         <Route path='/payment-option' element={<PaymentOption />} />
         <Route path='/order' element={<Order />} />

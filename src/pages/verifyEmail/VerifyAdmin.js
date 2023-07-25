@@ -1,33 +1,59 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Header } from '../../components/layout/Header'
 import { Footer } from '../../components/layout/Footer'
-import { Button } from 'react-bootstrap'
-import { useSearchParams } from 'react-router-dom'
-import { verifyAdminEmail } from '../cms/adminAction'
+import { Alert, Container } from 'react-bootstrap'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import Spinner from "react-bootstrap/Spinner";
+import { postNewAdminVerificationInfo } from '../../helper/axios'
+import { toast } from 'react-toastify'
 
 export const VerifyAdmin = () => {
 
-    let [searchParams] = useSearchParams();
+    const navigate = useNavigate()
+
+    let [queryStrings] = useSearchParams();
     const [showSpinner, setShowSpinner] = useState(true)
-    
-    const code = searchParams.get("c")
-    const email = searchParams.get("e")
+    const [resp, setResp] = useState({});
 
-    const handleOnClick = (e) =>{
-      e.preventDefault();
-      verifyAdminEmail(code, email);
-    }
+    const code = queryStrings.get("c")
+    const email = queryStrings.get("e")
 
+    //1. call api to verify from the server
+    // 2. based on the respon show it and if success redirect to login page
+    useEffect(() =>{
+      // callAPI &&
+
+      postNewAdminVerificationInfo({code, email}).then((resp) =>{
+        setResp(resp);
+        setShowSpinner(false)
+        toast[resp.status](resp.message);
+        if(resp.status === "success"){
+          navigate("/")
+        }
+      })
+      //callAPI.current = false
+    }, [code, email, navigate])
 
   return (
     <div>
         <Header />
-        <div className="main App">
-            <Button onClick={handleOnClick}>
-              
-              Verify the email
-              </Button>
-        </div>
+        <main className="main mt-5">
+          <Container>
+            {
+              showSpinner ? (
+                <div className='mt-5 text-center'>
+                  <Spinner animation='border' variant='primary' className='fs-1' />
+                  <br/>
+                  Please wait while account being verified......
+                </div>
+              ) :(
+                <Alert variant={resp.status === "success" ? "Success" : "danger"}>
+                  {resp.message}
+                </Alert>
+              )
+            }
+          </Container>
+        </main>
         <Footer />
     </div>
   )

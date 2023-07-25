@@ -3,7 +3,7 @@ import { postNewAdmin, updateEmailVerification } from '../../helper/axios';
 
 export const createNewAdminAction = async (obj) => {
     
-    const pendingResp = await postNewAdmin(obj)
+    const pendingResp = postNewAdmin(obj)
 
     toast.promise(pendingResp, {
         pending: "Please await...."

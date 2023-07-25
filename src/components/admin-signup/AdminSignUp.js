@@ -57,7 +57,7 @@ export const AdminSignUp = () => {
             type: "password"
         }
       ]
-
+      
       const [form, setForm] = useState({})
 
       const handleOnChange = (e) =>{

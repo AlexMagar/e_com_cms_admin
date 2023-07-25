@@ -7,10 +7,6 @@ import {Link, useNavigate} from 'react-router-dom'
 
 export const Header = () => {
 
-  const navigate = useNavigate()
-  const handleOnSignOut = () =>{
-    navigate("/");
-  }
   return (
     <div> 
     <Navbar expand="md" variant="dark" className="bg-dark">
@@ -21,12 +17,12 @@ export const Header = () => {
         <Nav className="ms-auto">
           <Link to="/dashboard" className="nav-link">Dashboard</Link>
           <Link to="/login" className="nav-link">SignIn</Link>
-          <Link to="/new-admin" className="nav-link">SignUp</Link>
-          <Link to="/" className="nav-link" onClick={handleOnSignOut}>SignOut</Link>
+          {/* <Link to="/new-admin" className="nav-link">SignUp</Link>
+          <Link to="/" className="nav-link" >SignOut</Link> */}
         </Nav>
       </Navbar.Collapse>
     </Container>
-  </Navbar>
+    </Navbar>
     </div>
   )
 }

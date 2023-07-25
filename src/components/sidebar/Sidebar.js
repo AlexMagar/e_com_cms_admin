@@ -15,7 +15,7 @@ export const Sidebar = () => {
         <nav>
             <ul className='list-unstyled'>
                 <li><Link className='nav-link' to="/dashboard"><AiFillDashboard className='fs-4'/> Dashboard</Link></li>
-                <li><Link className='nav-link' to="/catageory"><BiCategoryAlt className='fs-4'/> Category</Link></li>
+                <li><Link className='nav-link' to="/category"><BiCategoryAlt className='fs-4'/> Category</Link></li>
                 <li><Link className='nav-link' to="/product"><MdOutlineProductionQuantityLimits className='fs-4'/> Product</Link></li>
                 <li><Link className='nav-link' to="/payment-option"><AiFillCreditCard className='fs-4'/> Payment Options</Link></li>
                 <li><Link className='nav-link' to="/order"><FaShuttleVan className='fs-4'/> Order</Link></li>

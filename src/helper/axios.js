@@ -33,6 +33,15 @@ export const postNewAdmin = (data) =>{
     return axiosProcessor(obj)
 }
 
+export const postNewAdminVerificationInfo =(data) =>{
+    const obj ={
+        method: 'post',
+        url: adminApi + "/admin-verification",
+        obj: data
+    }
+    return axiosProcessor(obj)
+}
+
 
 // ========= email verifation =======
 export const updateEmailVerification = (email, code) =>{
