@@ -3,9 +3,12 @@ import { Header } from '../../components/layout/Header'
 import { Footer } from '../../components/layout/Footer'
 import { CustomInput } from '../../components/custom-input/CustomInput'
 import { Button, Form } from 'react-bootstrap'
-
+import { fetchAdminAction } from "../cms/adminAction";
+import { useDispatch } from "react-redux";
 
 export const SignIn = () => {
+
+  const dispatch = useDispatch()
 
   const [form, setForm] = useState({})
 
@@ -37,8 +40,8 @@ export const SignIn = () => {
 
   const handleOnSubmit = (e) =>{
     e.preventDefault();
-    
-    console.log(form);
+    dispatch(fetchAdminAction(form));
+    console.log("From SignIn ",form);
   }
 
   return (

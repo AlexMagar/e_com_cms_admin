@@ -28,7 +28,7 @@ export const VerifyAdmin = () => {
         setShowSpinner(false)
         toast[resp.status](resp.message);
         if(resp.status === "success"){
-          navigate("/")
+          navigate("/login")
         }
       })
       //callAPI.current = false

@@ -5,7 +5,6 @@ const rootApi = process.env.REACT_APP_ROOTAPI;
 const adminApi = rootApi + "/admin"
 
 const axiosProcessor = async ({method, url, obj}) => {
-    console.log(adminApi)
     try {
         
         const {data} = await axios({
@@ -22,12 +21,21 @@ const axiosProcessor = async ({method, url, obj}) => {
     }
 }
 
-
-// ========= cms admin ===========
+// ========= admin api ===========
 export const postNewAdmin = (data) =>{
-    const obj = {
+    const obj ={
         method: 'post',
         url: adminApi,
+        obj: data
+    }
+    return axiosProcessor(obj)
+}
+
+export const loginAdmin = (data) =>{
+    console.log("From axios login admin ", data)
+    const obj = {
+        method: 'post',
+        url: adminApi + "/login",
         obj: data
     }
     return axiosProcessor(obj)
@@ -41,7 +49,6 @@ export const postNewAdminVerificationInfo =(data) =>{
     }
     return axiosProcessor(obj)
 }
-
 
 // ========= email verifation =======
 export const updateEmailVerification = (email, code) =>{
