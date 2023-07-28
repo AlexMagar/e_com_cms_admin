@@ -5,10 +5,12 @@ import { CustomInput } from '../../components/custom-input/CustomInput'
 import { Button, Form } from 'react-bootstrap'
 import { fetchAdminAction } from "../cms/adminAction";
 import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom'
 
 export const SignIn = () => {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [form, setForm] = useState({})
 
@@ -40,7 +42,8 @@ export const SignIn = () => {
 
   const handleOnSubmit = (e) =>{
     e.preventDefault();
-    dispatch(fetchAdminAction(form));
+    const isAdded = dispatch(fetchAdminAction(form));
+    isAdded && navigate("/")
     console.log("From SignIn ",form);
   }
 

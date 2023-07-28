@@ -4,6 +4,8 @@ const rootApi = process.env.REACT_APP_ROOTAPI;
 
 const adminApi = rootApi + "/admin"
 
+const categoryApi = rootApi + "/category"
+
 const axiosProcessor = async ({method, url, obj}) => {
     try {
         
@@ -53,4 +55,18 @@ export const postNewAdminVerificationInfo =(data) =>{
 // ========= email verifation =======
 export const updateEmailVerification = (email, code) =>{
     console.log("we are in email action verification and need put method")
+}
+
+
+// ============= category ============
+
+export const postNewCategory = (title) =>{
+
+    console.log("axios category: ", title)
+    const obj = {
+        method: 'post',
+        url: categoryApi,
+        obj: title
+    }
+    return axiosProcessor(obj)
 }

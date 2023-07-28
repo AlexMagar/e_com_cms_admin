@@ -4,12 +4,9 @@ import Form from 'react-bootstrap/Form'
 import { CustomInput } from '../custom-input/CustomInput'
 import { createNewAdminAction } from '../../pages/cms/adminAction'
 import { toast } from 'react-toastify'
-import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 export const AdminSignUp = () => {
-
-    const dispatch = useDispatch()
     const navigate = useNavigate();
 
     const inputs =[
@@ -85,12 +82,6 @@ export const AdminSignUp = () => {
         }
         const isAdded = createNewAdminAction(rest);
         isAdded && navigate("/dashboard")
-
-        // if(window.confirm(`Do you want to add ${form.email} to the Database`)){
-        //     const isAdded = dispatch(postCmsAction(form))
-        //     isAdded && navigate("/");
-           
-        // }
       }
 
 
