@@ -9,7 +9,7 @@ const adminSlice = createSlice({
     initialState,
     reducers: {
         setAdmin: (state, {payload}) =>{
-            state.adminShow = payload
+            state.adminList = payload
         }
     }
 })

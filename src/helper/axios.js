@@ -57,16 +57,41 @@ export const updateEmailVerification = (email, code) =>{
     console.log("we are in email action verification and need put method")
 }
 
-
 // ============= category ============
+export const postNewCategory = (data) =>{
 
-export const postNewCategory = (title) =>{
-
-    console.log("axios category: ", title)
+    console.log("axios category: ", data)
     const obj = {
         method: 'post',
         url: categoryApi,
-        obj: title
+        obj: data
+    }
+    return axiosProcessor(obj)
+}
+
+export const getCategory = () =>{
+
+    const obj = {
+        method: 'get',
+        url: categoryApi,
+    }
+    return axiosProcessor(obj)
+}
+
+
+export const  updateCategory = (data) =>{
+    const obj ={
+        method: "put",
+        url: categoryApi,
+        obj: data
+    }
+    return axiosProcessor(obj)
+}
+
+export const deleteCategory = (_id) =>{
+    const obj = {
+        method: "delete",
+        url: categoryApi + "/" + _id
     }
     return axiosProcessor(obj)
 }

@@ -3,9 +3,9 @@ import { Header } from '../../components/layout/Header'
 import { Footer } from '../../components/layout/Footer'
 import { CustomInput } from '../../components/custom-input/CustomInput'
 import { Button, Form } from 'react-bootstrap'
-import { fetchAdminAction } from "../cms/adminAction";
 import { useDispatch } from "react-redux";
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { loginAdminAction } from '../cms/adminAction'
 
 export const SignIn = () => {
 
@@ -42,7 +42,7 @@ export const SignIn = () => {
 
   const handleOnSubmit = (e) =>{
     e.preventDefault();
-    const isAdded = dispatch(fetchAdminAction(form));
+    const isAdded = dispatch(loginAdminAction(form))
     isAdded && navigate("/")
     console.log("From SignIn ",form);
   }
@@ -64,6 +64,7 @@ export const SignIn = () => {
             <div className='d-grid'>
               <Button variant="primary" type='submit'>Login</Button>
             </div>
+            <div className="mt-2 text-end text-center">Forgot Password <Link to="rest-pass-otp">reset</Link>now</div>
           </Form>
           </main>
         <Footer />

@@ -17,8 +17,8 @@ export const Header = () => {
         <Nav className="ms-auto">
           <Link to="/dashboard" className="nav-link">Dashboard</Link>
           <Link to="/login" className="nav-link">SignIn</Link>
-          {/* <Link to="/new-admin" className="nav-link">SignUp</Link>
-          <Link to="/" className="nav-link" >SignOut</Link> */}
+          {/* <Link to="/new-admin" className="nav-link">SignUp</Link> */}
+          <Link to="/" className="nav-link" >SignOut</Link>
         </Nav>
       </Navbar.Collapse>
     </Container>

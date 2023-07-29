@@ -15,8 +15,17 @@ import { Order } from './pages/order/Order';
 import { Customer } from './pages/customer/Customer';
 import { AdminUser } from './pages/admin-user/AdminUser';
 import { Profile } from './pages/profile/Profile';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getCategoryAction } from './pages/category/categoryAction';
 
 function App() {
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getCategoryAction())
+  }, [dispatch])
 
   return (
     <div>

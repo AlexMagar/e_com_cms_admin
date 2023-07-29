@@ -2,15 +2,20 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 const initialState = {
-    categoryList : {}
+    categoryList : [],
 }
 
 const categorySlice = createSlice({
     name: "Category",
     initialState,
     reducers:{
-        setCategory: (state, {payload}) =>{
-            state.categoryShow = payload
+        setCategory: (state, {payload}) =>
+        {
+            if(state.categoryList.length === 0 && payload.length === 0){
+                return;
+            }
+
+            state.categoryList = payload
         }
     }
 })

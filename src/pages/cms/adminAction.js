@@ -1,6 +1,6 @@
 import {toast} from "react-toastify"
-import { postNewAdmin, updateEmailVerification, loginAdmin } from '../../helper/axios';
-import { setAdmin } from "./adminSlice";
+import { postNewAdmin, loginAdmin } from '../../helper/axios';
+
 
 export const createNewAdminAction = async (obj) =>{
     const pendingResp = postNewAdmin(obj)
@@ -13,15 +13,21 @@ export const createNewAdminAction = async (obj) =>{
 
 }
 
-export const verifyAdminEmail = async (email, code) =>{
-    updateEmailVerification(email, code)
-    console.log(email, code)
-}
+export const loginAdminAction = async (obj) =>{
+    const pendingResp = loginAdmin(obj)
 
-export const fetchAdminAction = (obj) => async (dispatch) =>{
-    const {status, message, user} = await loginAdmin(obj);
-    console.log("action fetch admin action: ", status, message, user)
+    toast.promise(pendingResp, {
+        pending: "Please wait...."
+    })
 
-    user?._id && dispatch(setAdmin(user))
+    const {status, message, token} = await pendingResp;
 
+    console.log("adminAction token: ", token)
+
+    toast[status](message)
+
+    if(status === "success"){
+        sessionStorage.setItem("accessJWT", token.accessJWT);
+        localStorage.setItem("refreshJWT", token.refreshJWT)
+    }
 }
