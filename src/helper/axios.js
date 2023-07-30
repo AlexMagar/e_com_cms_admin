@@ -6,13 +6,22 @@ const adminApi = rootApi + "/admin"
 
 const categoryApi = rootApi + "/category"
 
-const axiosProcessor = async ({method, url, obj}) => {
+const getAccessJWT = () => {
+    return sessionStorage.getItem("accessJWT")
+}
+
+const axiosProcessor = async ({method, url, obj, isPrivate}) => {
+    
+    const headers = {
+        Authorization: isPrivate ? getAccessJWT() : null
+    }
+    
     try {
-        
         const {data} = await axios({
             method,
             url,
-            data: obj
+            data: obj, 
+            headers
         })
         return data
     } catch (error) {
@@ -24,6 +33,15 @@ const axiosProcessor = async ({method, url, obj}) => {
 }
 
 // ========= admin api ===========
+export const getAdminInfo = (data) =>{
+    const obj ={
+        method: 'post',
+        url: adminApi,
+        isPrivate: true
+    }
+    return axiosProcessor(obj)
+}
+
 export const postNewAdmin = (data) =>{
     const obj ={
         method: 'post',
@@ -74,6 +92,7 @@ export const getCategory = () =>{
     const obj = {
         method: 'get',
         url: categoryApi,
+        isPrivate: true
     }
     return axiosProcessor(obj)
 }

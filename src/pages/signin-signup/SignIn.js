@@ -1,18 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Header } from '../../components/layout/Header'
 import { Footer } from '../../components/layout/Footer'
 import { CustomInput } from '../../components/custom-input/CustomInput'
 import { Button, Form } from 'react-bootstrap'
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from 'react-router-dom'
-import { loginAdminAction } from '../cms/adminAction'
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { autoLogin, loginAdminAction } from '../cms/adminAction'
 
 export const SignIn = () => {
 
+  const initialState = {
+    email: "",
+    password: ""
+  }
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [form, setForm] = useState(initialState)
+  const {admin} = useSelector((state) => state.adminInfo)
+  const location = useLocation()
+  const pathTo = location.state?.form.location.pathname || "/dashboard"
 
-  const [form, setForm] = useState({})
+  useEffect(() =>{
+    admin?._id && navigate(pathTo)
+    dispatch(autoLogin())
+  }, [admin, navigate, dispatch, pathTo])
 
   const inputs = [
     {

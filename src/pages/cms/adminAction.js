@@ -1,5 +1,6 @@
 import {toast} from "react-toastify"
-import { postNewAdmin, loginAdmin } from '../../helper/axios';
+import { postNewAdmin, loginAdmin, getAdminInfo } from '../../helper/axios';
+import { setAdmin } from "./adminSlice";
 
 
 export const createNewAdminAction = async (obj) =>{
@@ -29,5 +30,38 @@ export const loginAdminAction = async (obj) =>{
     if(status === "success"){
         sessionStorage.setItem("accessJWT", token.accessJWT);
         localStorage.setItem("refreshJWT", token.refreshJWT)
+        dispatch(getAdminProfileAction())
+    }
+
+    //get the user data and mount in the state
+
+}
+
+//get admin profile
+export const getAdminProfileAction = () => async (dispatch) =>{
+    // call the api to get user info
+    const {status, user} = await getAdminInfo();
+
+    //mount the state with the user data
+    if(status === "success"){
+        dispatch(setAdmin(user))
+    }
+}
+
+
+export const autoLogin = () => (dispatch) =>{
+    //check if accessJWT exit in session
+
+    const accessJWT = sessionStorage.getItem("accessJWT")
+
+    if(accessJWT) {
+       return dispatch(getAdminProfileAction())
+    }
+
+    const refreshJWT = localStorage.getItem("refreshJWT")
+    if(refreshJWT) {
+        //request new accessJWT from server and all getAdminProfile
+
+        return
     }
 }

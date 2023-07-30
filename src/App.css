@@ -23,7 +23,7 @@
 }
 
 .page-content{
-  height: 80vh;
+  min-height: 80vh;
 }
 
 .sid-nav li{

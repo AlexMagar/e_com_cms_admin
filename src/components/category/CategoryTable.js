@@ -2,15 +2,20 @@ import { Button, Form } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { EditCategoryForm } from "./EditCategoryForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CustomModal } from "../customModal/CustomModal";
 import { setModalShow } from "../../system/systemSlice";
+import { getCategoryAction } from "../../pages/category/categoryAction";
 
 export const CategoryTable = () => {
 
     const dispatch = useDispatch()
     const [selectedCat, setSelectedCat] = useState({})
     const {categoryList} = useSelector((state) => state.categoryInfo)
+
+    useEffect(() =>{
+      dispatch(getCategoryAction())
+    }, [dispatch])
 
     const handleOnEdit = (obj) =>{
     setSelectedCat(obj)
@@ -60,7 +65,7 @@ export const CategoryTable = () => {
               <td>{createdAt.slice(0, 10)}</td>
               <td>
                 <Button variant="danger" 
-                    onClick={ handleOnEdit({_id, status, title, slug, createdAt})}>
+                    onClick={ () => handleOnEdit({_id, status, title, slug, createdAt})}>
                     Edit
                 </Button>
               </td>
