@@ -7,12 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { autoLogin, loginAdminAction } from '../cms/adminAction'
 
-export const SignIn = () => {
 
-  const initialState = {
-    email: "",
-    password: ""
-  }
+const initialState = {
+  email: "",
+  password: ""
+}
+
+export const SignIn = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -56,7 +57,7 @@ export const SignIn = () => {
     e.preventDefault();
     const isAdded = dispatch(loginAdminAction(form))
     isAdded && navigate("/")
-    console.log("From SignIn ",form);
+    // console.log("From SignIn ",form);
   }
 
   return (

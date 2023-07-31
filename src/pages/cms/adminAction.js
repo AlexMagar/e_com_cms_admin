@@ -1,5 +1,5 @@
 import {toast} from "react-toastify"
-import { postNewAdmin, loginAdmin, getAdminInfo } from '../../helper/axios';
+import { postNewAdmin, loginAdmin, getAdminInfo, getNewRefreshJWT } from '../../helper/axios';
 import { setAdmin } from "./adminSlice";
 
 
@@ -14,7 +14,7 @@ export const createNewAdminAction = async (obj) =>{
 
 }
 
-export const loginAdminAction = async (obj) =>{
+export const loginAdminAction = (obj) => async (dispatch) =>{
     const pendingResp = loginAdmin(obj)
 
     toast.promise(pendingResp, {
@@ -49,7 +49,7 @@ export const getAdminProfileAction = () => async (dispatch) =>{
 }
 
 
-export const autoLogin = () => (dispatch) =>{
+export const autoLogin = () => async (dispatch) =>{
     //check if accessJWT exit in session
 
     const accessJWT = sessionStorage.getItem("accessJWT")
@@ -61,7 +61,11 @@ export const autoLogin = () => (dispatch) =>{
     const refreshJWT = localStorage.getItem("refreshJWT")
     if(refreshJWT) {
         //request new accessJWT from server and all getAdminProfile
+        const { accessJWT } = await getNewRefreshJWT();
 
-        return
+        if(accessJWT){
+            sessionStorage.setItem("accessJWT", accessJWT)
+            dispatch(getAdminProfileAction())
+        }
     }
 }

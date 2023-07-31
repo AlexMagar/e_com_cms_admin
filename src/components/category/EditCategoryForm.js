@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
-import { updateCategoryAction } from '../../pages/category/categoryAction'
+import { deleteCategoryAction, updateCategoryAction } from '../../pages/category/categoryAction'
 
 export const EditCategoryForm = ({category}) => {
 
@@ -37,6 +37,7 @@ export const EditCategoryForm = ({category}) => {
     const handleOnDelete = () =>{
         if(window.confirm("Are you sure want to delete this category"))
         dispatch(deleteCategoryAction(category._id));
+        
     }
 
   return (

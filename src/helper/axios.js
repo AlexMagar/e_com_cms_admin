@@ -10,10 +10,16 @@ const getAccessJWT = () => {
     return sessionStorage.getItem("accessJWT")
 }
 
-const axiosProcessor = async ({method, url, obj, isPrivate}) => {
+const getRefreshJWT = () => {
+    return localStorage.getItem("refreshJWT")
+}
+
+const axiosProcessor = async ({method, url, obj, isPrivate, refreshToken}) => {
     
+    const token = refreshToken ? getRefreshJWT() : getAccessJWT()
+
     const headers = {
-        Authorization: isPrivate ? getAccessJWT() : null
+        Authorization: isPrivate ? token : null
     }
     
     try {
@@ -111,6 +117,32 @@ export const deleteCategory = (_id) =>{
     const obj = {
         method: "delete",
         url: categoryApi + "/" + _id
+    }
+    return axiosProcessor(obj)
+}
+
+
+// ========== get new refreshJWT =========== 
+
+export const getNewRefreshJWT = () =>{
+    const obj = {
+        method: 'get',
+        url: adminApi + "/get-accessjwt",
+        isPrivate: true,
+        refreshToken: true
+    }
+    return axiosProcessor(obj)
+}
+
+export const logoutAdmin = (_id) =>{
+    const obj ={
+        method: 'post',
+        url: adminApi + "/logout",
+        obj: {
+            _id,
+            accessJWT : getAccessJWT(),
+            refreshJWT: getRefreshJWT()
+        }
     }
     return axiosProcessor(obj)
 }
