@@ -1,10 +1,9 @@
 import axios from 'axios'
 
 const rootApi = process.env.REACT_APP_ROOTAPI;
-
 const adminApi = rootApi + "/admin"
-
 const categoryApi = rootApi + "/category"
+const poApi = rootApi + "/payment-option"
 
 const getAccessJWT = () => {
     return sessionStorage.getItem("accessJWT")
@@ -143,6 +142,18 @@ export const logoutAdmin = (_id) =>{
             accessJWT : getAccessJWT(),
             refreshJWT: getRefreshJWT()
         }
+    }
+    return axiosProcessor(obj)
+}
+
+// ========== Payment Option =========== 
+
+export const postNewPO = (data) =>{
+    const obj ={
+        method: 'post',
+        url: poApi,
+        obj: data,
+        isPrivate: true
     }
     return axiosProcessor(obj)
 }
