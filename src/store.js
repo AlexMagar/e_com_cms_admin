@@ -5,12 +5,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import adminReducer from "./pages/cms/adminSlice";
 import categoryReducer from './pages/category/categorySlice'
 import systemReducer from './system/systemSlice'
+import poReducer from "./pages/payment-option/poSlice";
 
 const store = configureStore({
     reducer: {
         adminInfo : adminReducer,
         categoryInfo: categoryReducer,
         system: systemReducer,
+        poInfo: poReducer
     }
 })
 
