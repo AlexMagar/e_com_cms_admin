@@ -157,3 +157,11 @@ export const postNewPO = (data) =>{
     }
     return axiosProcessor(obj)
 }
+export const gettNewPOs = () =>{
+    const obj ={
+        method: 'get',
+        url: poApi,
+        isPrivate: true
+    }
+    return axiosProcessor(obj)
+}
