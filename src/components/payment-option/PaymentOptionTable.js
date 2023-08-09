@@ -1,25 +1,31 @@
 import { Button, Form } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { CustomModal } from "../customModal/CustomModal";
 import { getOPsAction } from "../../pages/payment-option/poAction";
+import { EditPaymentOption } from "./EditPaymentOption";
+import { setModalShow } from "../../system/systemSlice";
 
 export const PaymentOptionTable = () => {
 
     const dispatch = useDispatch()
-    const { paymentOptions } = useSelector((state) => state.poInfo)``
+    const { paymentOptions } = useSelector((state) => state.poInfo)
+    const [selectedPO, setSelectedPO] = useState({})
 
     useEffect(() =>{
       dispatch(getOPsAction())
     }, [dispatch])
 
     const handleOnEdit = (obj) =>{
+      setSelectedPO(obj)
+      dispatch(setModalShow(true))
     };
 
   return (
     <>
-        <CustomModal title="Edit Category" >
+        <CustomModal title="Edit Payment Option" >
+          <EditPaymentOption po={selectedPO}/>
         </CustomModal >
       <div className="d-flex justify-content-between mt-5">
         <div> {paymentOptions.length } Paymeny Options Found</div>
