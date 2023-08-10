@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { CustomInput } from "../../components/custom-input/CustomInput";
-import { addNewPOAction } from '../../pages/payment-option/poAction';
+import { addNewPOAction, deletePOsAction } from '../../pages/payment-option/poAction';
 
 const initialState = {
     status: "",
@@ -36,6 +36,12 @@ export const EditPaymentOption = ({po}) => {
         setForm(initialState) //reset the form
     }
 
+    const handleOnDelete = () => {
+        if(window.confirm("Are you sure want to delete this payment option?"))
+
+        dispatch(deletePOsAction(form._id))
+    }
+
 
   return (
     <div className="border p-4 rounded shadow-lg">
@@ -55,7 +61,7 @@ export const EditPaymentOption = ({po}) => {
                 </div>
             </Form>
             <div className="d-grid mt-3">
-                <Button variant='danger' type='submit'>Delete Payment Option</Button>
+                <Button variant='danger' type='submit' onClick={handleOnDelete}>Delete Payment Option</Button>
             </div>
             </Col>
         </Row>
