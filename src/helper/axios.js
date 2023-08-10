@@ -30,6 +30,9 @@ const axiosProcessor = async ({method, url, obj, isPrivate, refreshToken}) => {
         })
         return data
     } catch (error) {
+        if(error?.response?.status === 403 && error?.response?.data?.message === "jwt expired"){
+            console.log("user refreshJWT to request new accessJWT and recall the function again")
+        }
         return{
             status: 'error',
             message: error.response ? error?.response?.data?.message : error.message,
@@ -123,7 +126,7 @@ export const deleteCategory = (_id) =>{
 
 // ========== get new refreshJWT =========== 
 
-export const getNewRefreshJWT = () =>{
+export const getNewAccessJWT = () =>{
     const obj = {
         method: 'get',
         url: adminApi + "/get-accessjwt",
@@ -157,6 +160,7 @@ export const postNewPO = (data) =>{
     }
     return axiosProcessor(obj)
 }
+
 export const gettNewPOs = () =>{
     const obj ={
         method: 'get',
@@ -165,3 +169,23 @@ export const gettNewPOs = () =>{
     }
     return axiosProcessor(obj)
 }
+
+export const updateNewPOs = (data) =>{
+    const obj ={
+        method: 'put',
+        obj: data,
+        url: poApi,
+        isPrivate: true
+    }
+    return axiosProcessor(obj)
+}
+
+export const deletePO = () =>{
+    const obj ={
+        method: 'delete',
+        url: poApi + "/" + _id,
+        isPrivate: true
+    }
+    return axiosProcessor(obj)
+}
+
