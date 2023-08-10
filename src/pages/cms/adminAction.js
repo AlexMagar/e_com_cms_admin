@@ -1,5 +1,5 @@
 import {toast} from "react-toastify"
-import { postNewAdmin, loginAdmin, getAdminInfo, getNewRefreshJWT } from '../../helper/axios';
+import { postNewAdmin, loginAdmin, getAdminInfo, getNewAccessJWT } from '../../helper/axios';
 import { setAdmin } from "./adminSlice";
 
 
@@ -61,7 +61,7 @@ export const autoLogin = () => async (dispatch) =>{
     const refreshJWT = localStorage.getItem("refreshJWT")
     if(refreshJWT) {
         //request new accessJWT from server and all getAdminProfile
-        const { accessJWT } = await getNewRefreshJWT();
+        const { accessJWT } = await getNewAccessJWT();
 
         if(accessJWT){
             sessionStorage.setItem("accessJWT", accessJWT)
