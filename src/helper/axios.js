@@ -31,9 +31,19 @@ const axiosProcessor = async ({method, url, obj, isPrivate, refreshToken}) => {
         return data
     } catch (error) {
         if(error?.response?.status === 403 && error?.response?.data?.message === "jwt expired"){
-            console.log("user refreshJWT to request new accessJWT and recall the function again")
+            // console.log("user refreshJWT to request new accessJWT and recall the function again")
+
+            // 1. get new accessJWT
+            const {status, accessJWT} = await getNewAccessJWT();
+            if(status === "success" && accessJWT){
+                sessionStorage.setItem("accessJWT", accessJWT)
+            }
+
+
+            // 2. continue the request
+            return axiosProcessor({method, url, obj, isPrivate, refreshToken})
         }
-        return{
+        return{ 
             status: 'error',
             message: error.response ? error?.response?.data?.message : error.message,
         }
