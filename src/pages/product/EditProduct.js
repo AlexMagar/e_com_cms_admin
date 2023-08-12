@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AdminLayout } from '../../components/layout/AdminLayout'
 import { Button, Form } from 'react-bootstrap'
 import { CustomInput } from '../../components/custom-input/CustomInput'
@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { postNewProductAction } from './productAction'
 import { Link } from 'react-router-dom'
 import { SelectCategory } from '../../components/category/SelectCategory'
+import { getProduct } from '../../helper/axios'
 
 
 const initialState = { status: "inactive" }
@@ -13,6 +14,16 @@ const initialState = { status: "inactive" }
 export const EditProduct = () => {
 
     const dispatch = useDispatch()
+
+    useEffect(() =>{
+        getSelectedProduct()
+    }, [])
+
+    const getSelectedProduct = async () =>{
+        const {products} = await getProduct(_id)
+
+        products?._id && setForm(products)
+    }
 
     const inputs = [
         {
@@ -107,7 +118,7 @@ export const EditProduct = () => {
             <Form onSubmit={handleOnSubmit}>
 
                 <Form.Group className='mb-3'>
-                    <Form.Check name='status' type='switch' label="Status" onChange={handleOnChange}/>
+                    <Form.Check name='status' type='switch' label="Status" onChange={handleOnChange} checked={form.status === 'active'}/>
                 </Form.Group>
                 <SelectCategory onChange={handleOnChange} name="parentCat" required={true}/>
 

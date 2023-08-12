@@ -18,6 +18,7 @@ export const ProductTable = () =>{
         <tr>
           <th>#</th>
           <th>First Name</th>
+          <th>Status</th>
           <th>QTY</th>
           <th>Edit</th>
         </tr>

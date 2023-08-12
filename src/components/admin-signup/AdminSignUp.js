@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {Button} from 'react-bootstrap'
 import Form from 'react-bootstrap/Form'
 import { CustomInput } from '../custom-input/CustomInput'
-import { createNewAdminAction } from '../../pages/cms/adminAction'
+import { createNewAdminAction } from '../../pages/signin-signup/adminAction'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 

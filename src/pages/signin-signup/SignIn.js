@@ -5,7 +5,7 @@ import { CustomInput } from '../../components/custom-input/CustomInput'
 import { Button, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { autoLogin, loginAdminAction } from '../cms/adminAction'
+import { autoLogin, loginAdminAction } from './adminAction'
 
 
 const initialState = {
@@ -55,6 +55,7 @@ export const SignIn = () => {
 
   const handleOnSubmit = (e) =>{
     e.preventDefault();
+    console.log("signIn: ", form)
     const isAdded = dispatch(loginAdminAction(form))
     isAdded && navigate("/")
     // console.log("From SignIn ",form);

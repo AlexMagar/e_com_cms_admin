@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, useNavigate } from 'react-router-dom'
 import { logoutAdmin } from '../../helper/axios';
-import { setAdmin } from '../../pages/cms/adminSlice';
+import { setAdmin } from '../../pages/signin-signup/adminSlice';
 
 
 export const Header = () => {

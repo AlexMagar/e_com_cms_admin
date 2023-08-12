@@ -1,5 +1,5 @@
 import { toast } from "react-toastify"
-import { deletePO, gettNewPOs, postNewPO, updateNewPOs } from "../../helper/axios"
+import { deletePO, getNewPOs, postNewPO, updateNewPOs } from "../../helper/axios"
 import { setPaymentOptions } from "./poSlice";
 import { setModalShow } from "../../system/systemSlice";
 
@@ -15,7 +15,7 @@ export const addNewPOAction = data => async (dispatch) =>{
 export const getOPsAction = () => async (dispatch) =>{
     
     //fetch the data and also dispatch function created in Slice
-    const {status, result} = await gettNewPOs()
+    const {status, result} = await getNewPOs()
 
     status === "success" && dispatch(setPaymentOptions(result))
 }

@@ -1,11 +1,11 @@
-import {toast} from "react-toastify"
+
+import { toast } from 'react-toastify';
 import { postNewAdmin, loginAdmin, getAdminInfo, getNewAccessJWT } from '../../helper/axios';
 import { setAdmin } from "./adminSlice";
 
-
 export const createNewAdminAction = async (obj) =>{
     const pendingResp = postNewAdmin(obj)
-    console.log(pendingResp)
+    
     toast.promise(pendingResp, {
         pending: "Please await...."
     })
@@ -15,17 +15,21 @@ export const createNewAdminAction = async (obj) =>{
 }
 
 export const loginAdminAction = (obj) => async (dispatch) =>{
+
+    console.log("adminAction obj, loginAdminAction: ", obj)
     const pendingResp = loginAdmin(obj)
 
+    console.log(pendingResp)
     toast.promise(pendingResp, {
         pending: "Please wait...."
     })
 
     const {status, message, token} = await pendingResp;
 
-    console.log("adminAction token: ", token)
+    console.log("adminAction token: ", token, status)
 
     toast[status](message)
+
 
     if(status === "success"){
         sessionStorage.setItem("accessJWT", token.accessJWT);

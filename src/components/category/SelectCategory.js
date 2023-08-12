@@ -14,7 +14,7 @@ export const SelectCategory = (props) => {
             {
                 cats.map(({_id, title}) => (
                     <option>
-
+                        
                     </option>
                 ))
             }

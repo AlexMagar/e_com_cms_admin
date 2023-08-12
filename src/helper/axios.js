@@ -21,7 +21,6 @@ const axiosProcessor = async ({method, url, obj, isPrivate, refreshToken}) => {
     const headers = {
         Authorization: isPrivate ? token : null
     }
-    
     try {
         const {data} = await axios({
             method,
@@ -52,9 +51,9 @@ const axiosProcessor = async ({method, url, obj, isPrivate, refreshToken}) => {
 }
 
 // ========= admin api ===========
-export const getAdminInfo = (data) =>{
+export const getAdminInfo = () =>{
     const obj ={
-        method: 'post',
+        method: 'get',
         url: adminApi,
         isPrivate: true
     }
@@ -172,7 +171,7 @@ export const postNewPO = (data) =>{
     return axiosProcessor(obj)
 }
 
-export const gettNewPOs = () =>{
+export const getNewPOs = () =>{
     const obj ={
         method: 'get',
         url: poApi,
@@ -184,14 +183,14 @@ export const gettNewPOs = () =>{
 export const updateNewPOs = (data) =>{
     const obj ={
         method: 'put',
-        obj: data,
         url: poApi,
+        obj: data,
         isPrivate: true
     }
     return axiosProcessor(obj)
 }
 
-export const deletePO = () =>{
+export const deletePO = (_id) =>{
     const obj ={
         method: 'delete',
         url: poApi + "/" + _id,
@@ -211,16 +210,16 @@ export const postNewProduct = (data) =>{
     return axiosProcessor(obj)
 }
 
-export const getProduct = (data) =>{
+export const getProduct = (_id) =>{
     const obj ={
         method: 'get',
-        url: productApi,
+        url: _id ? productApi + "/" + _id : productApi,
         isPrivate: true
     }
     return axiosProcessor(obj)
 }
 
-export const deleteProduct = (data) =>{
+export const deleteProduct = (_id) =>{
     const obj ={
         method: 'delete',
         url: productApi + "/" + _id,
