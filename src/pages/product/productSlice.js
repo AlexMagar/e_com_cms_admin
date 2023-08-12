@@ -8,19 +8,19 @@ const productSlice = createSlice({
     name: "Product",
     initialState,
     reducers:{
-        setProduct: (state, {payload}) =>
+        setProducts: (state, {payload}) =>
         {
-            if(state.paymentOptions.length === 0 && payload.length === 0 && payload === undefined){
+            if(state.products.length === 0 && payload.length === 0 ){
                 return;
             }
 
-            state.paymentOptions = payload
+            state.products = payload
         }
     }
 })
 
 const {reducer, actions } = productSlice
 
-export const {setProduct} = actions
+export const {setProducts} = actions
 
 export default reducer;

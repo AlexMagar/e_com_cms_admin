@@ -20,6 +20,7 @@ import { useDispatch } from 'react-redux';
 import { getCategoryAction } from './pages/category/categoryAction';
 import { PrivateRoute } from './components/private/PrivateRoute';
 import { NewProduct } from './pages/product/NewProduct';
+import { EditProduct } from './pages/product/EditProduct';
 
 function App() {
 
@@ -48,6 +49,7 @@ function App() {
         <Route path='/admin-user' element={<PrivateRoute><AdminUser /> </PrivateRoute>} />
         <Route path='/profile' element={<PrivateRoute><Profile /> </PrivateRoute>} />
         <Route path='/new-product' element={<PrivateRoute><NewProduct /> </PrivateRoute>} />
+        <Route path='product/edit/:_id' element={<PrivateRoute><EditProduct /> </PrivateRoute>} />
       </Routes>
       <ToastContainer />
     </div>

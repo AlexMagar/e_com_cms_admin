@@ -213,9 +213,8 @@ export const postNewProduct = (data) =>{
 
 export const getProduct = (data) =>{
     const obj ={
-        method: 'post',
+        method: 'get',
         url: productApi,
-        obj: data,
         isPrivate: true
     }
     return axiosProcessor(obj)

@@ -10,7 +10,7 @@ import { SelectCategory } from '../../components/category/SelectCategory'
 
 const initialState = { status: "inactive" }
 
-export const NewProduct = () => {
+export const EditProduct = () => {
 
     const dispatch = useDispatch()
 

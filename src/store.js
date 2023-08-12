@@ -6,13 +6,15 @@ import adminReducer from "./pages/cms/adminSlice";
 import categoryReducer from './pages/category/categorySlice'
 import systemReducer from './system/systemSlice'
 import poReducer from "./pages/payment-option/poSlice";
+import productReducer from "./pages/product/productSlice";
 
 const store = configureStore({
     reducer: {
         adminInfo : adminReducer,
         categoryInfo: categoryReducer,
         system: systemReducer,
-        poInfo: poReducer
+        poInfo: poReducer,
+        productInfo: productReducer,
     }
 })
 

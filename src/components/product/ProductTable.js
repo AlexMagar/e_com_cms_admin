@@ -26,8 +26,10 @@ export const ProductTable = () =>{
         {
           products.map((item, i) => (
             <tr>
-              <td>1</td>
-              <td>Mark</td>
+              <td>{i+1}</td>
+              <td>
+                <img src={process.env.REACT_APP_ROOTSERVER + item.images[0]?.slice(6)} alt="img" width="150px"/>
+              </td>
               <td>Otto</td>
               <td>@mdo</td>
               <td><Button variant='primary'>Edit</Button></td>
