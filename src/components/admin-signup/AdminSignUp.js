@@ -60,7 +60,7 @@ export const AdminSignUp = () => {
         }
       ]
       
-      const [form, setForm] = useState({})
+      const [form, setForm] = useState({});
 
       const handleOnChange = (e) =>{
         const {name, value} = e.target;

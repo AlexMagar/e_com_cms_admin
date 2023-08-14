@@ -43,6 +43,9 @@ export const deleteProductAction = (_id) => async (dispatch) =>{
 
     if(status === 'success'){
         dispatch(getProductAction())
+        return true
     }
+
+    return false
 }
 

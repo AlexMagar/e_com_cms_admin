@@ -227,3 +227,14 @@ export const deleteProduct = (_id) =>{
     }
     return axiosProcessor(obj)
 }
+
+// === reset password ======
+
+export const requestPassOTP = (email) =>{
+    const obj ={
+        method: 'post',
+        url: adminApi + "/requst-opt",
+        obj: {email},
+    }
+    return axiosProcessor(obj)
+}

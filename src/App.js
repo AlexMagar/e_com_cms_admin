@@ -21,6 +21,7 @@ import { getCategoryAction } from './pages/category/categoryAction';
 import { PrivateRoute } from './components/private/PrivateRoute';
 import { NewProduct } from './pages/product/NewProduct';
 import { EditProduct } from './pages/product/EditProduct';
+import ResetPassword from './pages/signin-signup/ResetPassword';
 
 function App() {
 
@@ -34,9 +35,10 @@ function App() {
     <div>
       <Routes>
         {/* publice route */}
-        <Route path='/' element={<Home />}/>
-        <Route path="/login" element={<SignIn />} />
-        <Route path='/admin-verification' element={<VerifyAdmin />} />
+        {/* <Route path='/' element={<Home />}/> */}
+        <Route path="/" element={<SignIn />} />
+        <Route path='admin-verification' element={<VerifyAdmin />} />
+        <Route path='password-rest' element={<ResetPassword />} />
 
         {/* Private router */}
         <Route path='/new-admin' element={<PrivateRoute><SignUp /></PrivateRoute> } />

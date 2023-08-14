@@ -78,7 +78,7 @@ export const SignIn = () => {
             <div className='d-grid'>
               <Button variant="primary" type='submit'>Login</Button>
             </div>
-            <div className="mt-2 text-end text-center">Forgot Password <Link to="rest-pass-otp">reset</Link>now</div>
+            <div className="mt-2 text-end text-center">Forgot Password <Link to="password-rest">reset</Link> now</div>
           </Form>
           </main>
         <Footer />

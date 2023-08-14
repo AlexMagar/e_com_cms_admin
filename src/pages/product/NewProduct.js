@@ -13,6 +13,8 @@ const initialState = { status: "inactive" }
 export const NewProduct = () => {
 
     const dispatch = useDispatch()
+    const [form, setForm] = useState(initialState);
+    const [imgs, setImgs] = useState([])
 
     const inputs = [
         {
@@ -70,8 +72,6 @@ export const NewProduct = () => {
         }
     ]
 
-    const [form, setForm] = useState(initialState);
-    const [img, setImgs] = useState()
 
     const handleOnChange = (e) =>{
         let { checked, name, value } = e.target
@@ -85,17 +85,31 @@ export const NewProduct = () => {
         })
     }
 
-    const handleOnSubmit = (e) =>{
-        e.preventDefault()
-        const formDT = new FormData
-
-        //set all 
-        dispatch(postNewProductAction(form));
-    }
+   
 
     const handleOnImageAttached = (e) =>{
         const { files} = e.target
         setImgs(files)
+    }
+
+    const handleOnSubmit = (e) =>{
+        e.preventDefault()
+        const formDT = new FormData();
+
+        //set all from data in FormData
+
+        for(let key in form){
+            formDT.append(key, form[key]);
+        }
+
+        //check if there is any new image is being added
+        if(imgs.length){
+            [...imgs].forEach((item) =>{
+                formDT.append('images', item)
+            })
+        }
+
+        dispatch(postNewProductAction(formDT));
     }
 
   return (
@@ -118,7 +132,7 @@ export const NewProduct = () => {
                 }
 
                 <Form.Group className='mb-3 mt-3'>
-                    <Form.Control type='file' name='img' multiple onChange={handleOnSubmit}/>
+                    <Form.Control type='file' name='img' multiple onChange={handleOnSubmit} required={true}/>
                 </Form.Group>
 
                 <div className="d-grid mt-3 mb-3">

@@ -4,16 +4,20 @@ import { Button, Form } from 'react-bootstrap'
 import { CustomInput } from '../../components/custom-input/CustomInput'
 import { useDispatch } from 'react-redux'
 import { postNewProductAction } from './productAction'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { SelectCategory } from '../../components/category/SelectCategory'
 import { getProduct } from '../../helper/axios'
 
 
-const initialState = { status: "inactive" }
-
 export const EditProduct = () => {
 
     const dispatch = useDispatch()
+    const { _id } = useParams()
+    const navigate = useNavigate()
+    const [form, setForm] = useState({});
+    const [img, setImgs] = useState([])
+    const [imgToDelete, setImgToDelete] = useState([])
+
 
     useEffect(() =>{
         getSelectedProduct()
@@ -27,81 +31,92 @@ export const EditProduct = () => {
 
     const inputs = [
         {
-            name: 'name',
-            label: 'Name',
-            type: 'text',
-            placeholder: 'Samsung TV',
-            required: true
+          name: "name",
+          label: "Name",
+          type: "text",
+          placeholder: "Samsung T.V.",
+          required: true,
+          value: form.name,
         },
         {
-            name: 'sku',
-            label: 'Sku',
-            type: 'text',
-            placeholder: 'SAM-TV-8',
-            required: true
+          name: "slug",
+          label: "Slug",
+          type: "text",
+    
+          value: form.slug,
+          disabled: true,
         },
         {
-            name: 'qty',
-            label: 'QTY',
-            type: 'text',
-            placeholder: '50',
-            required: true
+          name: "sku",
+          label: "SKU",
+          type: "text",
+          placeholder: "SAM-TV-8",
+          required: true,
+          value: form.sku,
+          disabled: true,
         },
         {
-            name: 'price',
-            label: 'PRICE',
-            type: 'number',
-            placeholder: '1000',
-            required: true
+          name: "qty",
+          label: "QTY",
+          type: "number",
+          placeholder: "50",
+          required: true,
+          value: form.qty,
         },
         {
-            name: 'salesPrice',
-            label: 'Sales Price',
-            type: 'number',
-            placeholder: '800',
+          name: "price",
+          label: "PRICE",
+          type: "number",
+          placeholder: "1000",
+          required: true,
+          value: form.price,
         },
         {
-            name: 'salesStartDate',
-            label: 'Sales Start Date',
-            type: 'Date'
+          name: "salesPrice",
+          label: "Sales Price",
+          type: "number",
+          placeholder: "800",
+          value: form.salesPrice,
         },
         {
-            name: 'salesEndDate',
-            label: 'Sales End Date',
-            type: 'Date'
+          name: "salesStartDate",
+          label: "Sales Start Date",
+          type: "Date",
+          value: form?.salesStartDate?.slice(0, 10),
         },
         {
-            name: 'description',
-            label: 'Description',
-            type: 'text',
-            as: "textarea",
-            placeholder: 'Product Description',
-            rows:"10",
-            required: true
-        }
-    ]
+          name: "salesEndDate",
+          label: "Sales End Date",
+          type: "Date",
+          value: form?.salesEndDate?.slice(0, 10),
+        },
+        {
+          name: "description",
+          label: "Description",
+          type: "text",
+          as: "textarea",
+          placeholder: "product description ...",
+          rows: "10",
+          required: true,
+          value: form.description,
+        },
+      ];
 
-    const [form, setForm] = useState(initialState);
-    const [img, setImgs] = useState()
-
-    const handleOnChange = (e) =>{
+      const handleOnChange = (e) =>{
         let { checked, name, value } = e.target
 
-        if(name === 'status') {
-            value = checked ? 'active' : 'inactive'
+        if(name === 'thumbnail' && imgToDelete.includes(value)) {
+            return alert("Deleting image can't be set as thumbnail")
         }
+
+        if(name === 'status'){
+            value = checked ? "active" : "inactive";
+        }
+
         setForm({
             ...form,
             [name]:value
         })
-    }
-
-    const handleOnSubmit = (e) =>{
-        e.preventDefault()
-        const formDT = new FormData
-
-        //set all 
-        dispatch(postNewProductAction(form));
     }
 
     const handleOnImageAttached = (e) =>{
@@ -109,6 +124,39 @@ export const EditProduct = () => {
         setImgs(files)
     }
 
+    const handleOnSubmit = (e) =>{
+        e.preventDefault()
+
+        if(!window.confirm("Are you sure want to update this product")){
+            return
+        }
+
+        const formDT = new FormData();
+
+        //set all from data in FormData
+
+        //set all 
+        dispatch(postNewProductAction(form));
+    }
+
+
+    const handleOnDeleteSelect = (e) =>{
+        const {value, checked} = e.target;
+
+        if(checked){ 
+            setImgToDelete([
+            ...imgToDelete, value
+            ])
+        }else{
+            const temp = imgToDelete.filter(url => url !== value)
+
+            setImgToDelete(temp)
+        }
+       
+    }
+
+
+   
   return (
     <AdminLayout title="New Product">
         <Link to="/product"> 

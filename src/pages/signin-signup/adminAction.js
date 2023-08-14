@@ -26,9 +26,9 @@ export const loginAdminAction = (obj) => async (dispatch) =>{
 
     const {status, message, token} = await pendingResp;
 
-    console.log("adminAction token: ", token, status)
+    console.log("adminAction token: ", token, status, message);
 
-    toast[status](message)
+    toast[status](message);
 
 
     if(status === "success"){
