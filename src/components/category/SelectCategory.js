@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 export const SelectCategory = (props) => {
 
-    const { cats} = useSelector((state) => state.catInfo)
+    const { cats } = useSelector((state) => state.catInfo)
 
   return (
 
@@ -13,8 +13,8 @@ export const SelectCategory = (props) => {
             <option value=" ">---Select One ----</option>
             {
                 cats.map(({_id, title}) => (
-                    <option>
-                        
+                    <option key={_id} value={_id} selected={_id === props._id}>
+                        {title}
                     </option>
                 ))
             }
