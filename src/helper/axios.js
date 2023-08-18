@@ -39,7 +39,6 @@ const axiosProcessor = async ({method, url, obj, isPrivate, refreshToken}) => {
                 sessionStorage.setItem("accessJWT", accessJWT)
             }
 
-
             // 2. continue the request
             return axiosProcessor({method, url, obj, isPrivate, refreshToken})
         }
@@ -185,7 +184,6 @@ export const updateNewPOs = (data) =>{
         method: 'put',
         url: poApi,
         obj: data,
-        isPrivate: true
     }
     return axiosProcessor(obj)
 }
@@ -206,6 +204,16 @@ export const postNewProduct = (data) =>{
         url: productApi,
         obj: data,
         isPrivate: true
+    }
+    return axiosProcessor(obj)
+}
+
+export const updateProduct = (data) =>{
+    const obj = {
+        method: 'put',
+        url: productApi,
+        obj: data,
+        isPrivate: true,
     }
     return axiosProcessor(obj)
 }
@@ -235,6 +243,15 @@ export const requestPassOTP = (email) =>{
         method: 'post',
         url: adminApi + "/requst-opt",
         obj: {email},
+    }
+    return axiosProcessor(obj)
+}
+
+export const resetPass = (data) =>{
+    const obj = {
+        method: 'post',
+        url: adminApi + "/reset-password",
+        obj: data
     }
     return axiosProcessor(obj)
 }
