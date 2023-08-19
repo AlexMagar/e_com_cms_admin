@@ -15,7 +15,7 @@ export const addNewPOAction = data => async (dispatch) =>{
 export const getOPsAction = () => async (dispatch) =>{
     
     //fetch the data and also dispatch function created in Slice
-    const {status, result} = await getNewPOs()
+    const {status, result = []} = await getNewPOs()
 
     status === "success" && dispatch(setPaymentOptions(result))
 }
