@@ -19,6 +19,26 @@ export const postNewProductAction = (data) => async (dispatch) =>{
     }
 }
 
+export const updateProductAction = (data) => async (dispatch) => {
+    const pending = updateProduct(data);
+  
+    toast.promise(pending, {
+      pending: "Please wait",
+    });
+  
+    const { status, message } = await pending;
+  
+    toast[status](message);
+  
+    if (status === "success") {
+      /// fetch all the products
+      dispatch(getProductsAction());
+      return true;
+    }
+    return false;
+  };
+
+
 export const getProductAction = (data) => async (dispatch) =>{
 
     const {status, products} = await getProduct();
