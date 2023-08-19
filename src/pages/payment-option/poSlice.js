@@ -11,7 +11,7 @@ const paymentOptionsSlice = createSlice({
     reducers:{
         setPaymentOptions: (state, {payload}) =>
         {
-            if(state.paymentOptions.length === 0 && payload.length === 0 && payload === undefined){
+            if(state.paymentOptions?.length === 0 && payload?.length === 0 && payload === undefined){
                 return;
             }
 
