@@ -86,7 +86,6 @@ export const NewProduct = () => {
     }
 
    
-
     const handleOnImageAttached = (e) =>{
         const { files} = e.target
         setImgs(files)
@@ -132,7 +131,7 @@ export const NewProduct = () => {
                 }
 
                 <Form.Group className='mb-3 mt-3'>
-                    <Form.Control type='file' name='img' multiple onChange={handleOnSubmit} required={true}/>
+                    <Form.Control type='file' name='img' multiple onChange={handleOnImageAttached} required={true}/>
                 </Form.Group>
 
                 <div className="d-grid mt-3 mb-3">
