@@ -15,7 +15,7 @@ export const EditProduct = () => {
     const { _id } = useParams()
     const navigate = useNavigate()
     const [form, setForm] = useState({});
-    const [img, setImgs] = useState([])
+    const [imgs, setImgs] = useState([])
     const [imgToDelete, setImgToDelete] = useState([])
 
 
@@ -124,39 +124,61 @@ export const EditProduct = () => {
         setImgs(files)
     }
 
-    const handleOnSubmit = (e) =>{
-        e.preventDefault()
-
-        if(!window.confirm("Are you sure want to update this product")){
-            return
-        }
-
-        const formDT = new FormData();
-
-        //set all from data in FormData
-
-        //set all 
-        dispatch(postNewProductAction(form));
+    const handleOnSubmit =async (e) =>{
+      e.preventDefault();
+  
+      if (!window.confirm("Are you sure you want to update this product?")) {
+        return;
+      }
+      const formDt = new FormData();
+      // set all from data in FormDate
+  
+      //remove: sku, slug, __v, createdAt, updatedAt
+      let { sku, slug, __v, createdAt, updatedAt, ...rest } = form;
+  
+      //remove all the url form rest.images which matches the urls in imgToDelete
+  
+      rest.images = rest.images.filter((url) => !imgToDelete.includes(url));
+  
+      for (let key in rest) {
+        formDt.append(key, rest[key]);
+      }
+  
+      // check if there is any new image is being added
+      if (imgs.length) {
+        [...imgs].forEach((item) => {
+          formDt.append("images", item);
+        });
+      }
+  
+      const isUpdated = await dispatch(updateProductAction(formDt));
+  
+      isUpdated && getSelectedProduct();
+      setImgToDelete([]);
     }
 
+    const handleOnDelete = async () => {
+      if (window.confirm("Are you sure you want to delete this product?")) {
+        const isDeleted = await dispatch(deleteProductAction(_id));
+  
+        isDeleted && navigate("/product");
+      }
+    };
 
-    const handleOnDeleteSelect = (e) =>{
-        const {value, checked} = e.target;
-
-        if(checked){ 
-            setImgToDelete([
-            ...imgToDelete, value
-            ])
-        }else{
-            const temp = imgToDelete.filter(url => url !== value)
-
-            setImgToDelete(temp)
-        }
-       
-    }
+    const handleOnDeleteSelect = (e) => {
+      const { value, checked } = e.target;
+      if (value === form.thumbnail) {
+        return alert(
+          "You can't delete the thumbnail, choose another thumbnail first"
+        );
+      }
+  
+      checked
+        ? setImgToDelete([...imgToDelete, value])
+        : setImgToDelete(imgToDelete.filter((url) => url !== value));
+    };
 
 
-   
   return (
     <AdminLayout title="New Product">
         <Link to="/product"> 
@@ -175,16 +197,60 @@ export const EditProduct = () => {
                         <CustomInput key={i} {...item} onChange={handleOnChange}/>
                     ))
                 }
-
-                <Form.Group className='mb-3 mt-3'>
-                    <Form.Control type='file' name='img' multiple onChange={handleOnSubmit}/>
-                </Form.Group>
-
-                <div className="d-grid mt-3 mb-3">
-                    <Button variant='success' type='submit'>Add Product</Button>
+                <div className="py-5 d-flex justify-content-between">
+                  {form.images?.map((url) => (
+                  <div>
+                    <div>
+                      <input
+                      type="radio"
+                      name="thumbnail"
+                      checked={url === form.thumbnail}
+                      value={url}
+                      onChange={handleOnChange}
+                      />
+                  <label htmlFor="">Thumbnail</label>
                 </div>
-            </Form>
+                <img
+                  className="img-thumbnail"
+                  key={url}
+                  src={process.env.REACT_APP_ROOTSERVER + url?.slice(6)}
+                  alt=""
+                  width="150px"
+                />
+
+                <div>
+                  <Form.Check
+                    label="Delete"
+                    value={url}
+                    onChange={handleOnDeleteSelect}
+                    checked={imgToDelete.includes(url)}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <Form.Group className="mb-3 mt-3">
+            <Form.Control
+              type="file"
+              name="img"
+              multiple
+              onChange={handleOnImageAtached}
+            />
+          </Form.Group>
+          <div className="d-grid mt-3 mb-3">
+            <Button variant="success" type="submit">
+              Update Product
+            </Button>
+          </div>
+        </Form>
+
+        <div className="d-grid mb-3">
+          <Button onClick={handleOnDelete} variant="danger">
+            Delete this product
+          </Button>
         </div>
+      </div>
     </AdminLayout>
-  )
-}
+  );
+};
