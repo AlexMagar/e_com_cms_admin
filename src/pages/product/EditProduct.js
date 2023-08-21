@@ -3,10 +3,10 @@ import { AdminLayout } from '../../components/layout/AdminLayout'
 import { Button, Form } from 'react-bootstrap'
 import { CustomInput } from '../../components/custom-input/CustomInput'
 import { useDispatch } from 'react-redux'
-import { postNewProductAction } from './productAction'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { SelectCategory } from '../../components/category/SelectCategory'
 import { getProduct } from '../../helper/axios'
+import { deleteProductAction, updateProductAction } from './productAction'
 
 
 export const EditProduct = () => {
@@ -124,7 +124,7 @@ export const EditProduct = () => {
         setImgs(files)
     }
 
-    const handleOnSubmit =async (e) =>{
+    const handleOnSubmit = async (e) =>{
       e.preventDefault();
   
       if (!window.confirm("Are you sure you want to update this product?")) {
@@ -235,7 +235,7 @@ export const EditProduct = () => {
               type="file"
               name="img"
               multiple
-              onChange={handleOnImageAtached}
+              onChange={handleOnImageAttached}
             />
           </Form.Group>
           <div className="d-grid mt-3 mb-3">
