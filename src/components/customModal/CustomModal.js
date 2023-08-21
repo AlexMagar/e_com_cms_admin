@@ -6,7 +6,6 @@ export const CustomModal = ({title, children}) => {
 
     const dispatch = useDispatch()
     const {modalShow} = useSelector((state) => state.system)
-    console.log("customModal: ", modalShow)
 
   return (
     <Modal

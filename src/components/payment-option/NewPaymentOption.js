@@ -45,9 +45,9 @@ export const NewPaymentOption = () => {
                     <option value="inactive" selected={form.status === "inactive"}>Inactive</option>
                 </Form.Select>
                 <CustomInput label="Title" name="Title" placeholder="Pay by credit card" required onChange={handleOnChange} value={form.title}/>
-                <CustomInput as="textarea" name="description" placeholder="say how to make payment...." required onChange={handleOnChange} value={form.title}/>
+                <CustomInput as="textarea" rows={5} name="description" placeholder="say how to make payment...." required onChange={handleOnChange} value={form.title}/>
                 <div className="d-grid mt-3">
-                <Button variant='primary' type='submit'>Add New Category</Button>
+                <Button variant='dark' type='submit'>Add New Category</Button>
                 </div>
             </Form>
             </Col>

@@ -53,6 +53,7 @@ export const deleteCategoryAction = (_id) => async (dispatch) =>{
     toast[status](message)
 
     if(status === "success"){
+        //call the api to fetch all the cats and mount in the state
         dispatch(getCategoryAction());
     }
 }
