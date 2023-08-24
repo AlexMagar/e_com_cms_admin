@@ -4,7 +4,6 @@ import {Route, Routes} from 'react-router-dom'
 import { ToastContainer } from "react-toastify";
 import {SignIn} from './pages/signin-signup/SignIn'
 import {SignUp} from './pages/signin-signup/SignUp'
-import { Home } from './pages/home/Home';
 import 'react-toastify/dist/ReactToastify.css';
 import { VerifyAdmin } from "./pages/verifyEmail/VerifyAdmin";
 import { Dashboard } from './pages/dashboard/Dashboard';
