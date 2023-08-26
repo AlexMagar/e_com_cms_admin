@@ -58,6 +58,14 @@ export const getAdminInfo = () =>{
     }
     return axiosProcessor(obj)
 }
+export const getAdminDisplay = () =>{
+    const obj ={
+        method: 'get',
+        url: adminApi + "/display",
+        isPrivate: true
+    }
+    return axiosProcessor(obj)
+}
 
 export const postNewAdmin = (data) =>{
     const obj ={
@@ -251,6 +259,16 @@ export const resetPass = (data) =>{
     const obj = {
         method: 'post',
         url: adminApi + "/reset-password",
+        obj: data
+    }
+    return axiosProcessor(obj)
+}
+
+// ============= Profile ============
+export const updateProfile = (data) => {
+    const obj = {
+        method: "put",
+        url: adminApi + "/profile",
         obj: data
     }
     return axiosProcessor(obj)
