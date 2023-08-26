@@ -1,7 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
-    adminList : {},
+    adminList : [],
+    user:{}
 }
 
 const adminSlice = createSlice({
@@ -9,6 +10,9 @@ const adminSlice = createSlice({
     initialState,
     reducers: {
         setAdmin: (state, {payload}) =>{
+            state.admin = payload
+        },
+        setAdmins: (state, {payload}) =>{
             state.adminList = payload
         }
     }
