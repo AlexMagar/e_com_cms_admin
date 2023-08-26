@@ -20,7 +20,7 @@ export const SignIn = () => {
   const [form, setForm] = useState(initialState)
   const {admin} = useSelector((state) => state.adminInfo)
   const location = useLocation()
-  const pathTo = location.state?.form.location.pathname || "/dashboard"
+  const pathTo = location.state?.from?.location?.pathname || "/dashboard"
 
   useEffect(() =>{
     admin?._id && navigate(pathTo)
@@ -56,8 +56,7 @@ export const SignIn = () => {
   const handleOnSubmit = (e) =>{
     e.preventDefault();
     console.log("signIn: ", form)
-    const isAdded = dispatch(loginAdminAction(form))
-    isAdded && navigate("/")
+    dispatch(loginAdminAction(form))
     // console.log("From SignIn ",form);
   }
 
