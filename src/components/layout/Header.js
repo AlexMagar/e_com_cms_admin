@@ -25,7 +25,7 @@ export const Header = () => {
     sessionStorage.removeItem("accessJWT")
 
     //reset store
-    dispatch(setAdmin())
+    dispatch(setAdmin({}))
     navigate("/")
   }
   return (
@@ -45,7 +45,7 @@ export const Header = () => {
               </>
             )
             : (
-              <Link to="/login" className="nav-link">SignIn</Link>
+              <Link to="/" className="nav-link">SignIn</Link>
             )
           }
         </Nav>
