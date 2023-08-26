@@ -29,7 +29,7 @@ export const CategoryTable = () => {
             <EditCategoryForm cat={selectedCat} />
         </CustomModal >
       <div className="d-flex justify-content-between mt-5">
-        <div>30 Categories Found</div>
+        <div>{categoryList.length} Categories Found</div>
         <div>
           <Form.Control placeholder="Serach by name ..." />
         </div>
