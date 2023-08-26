@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Header } from "../../components/layout/Header";
 import { Footer } from "../../components/layout/Footer";
-import { useSelector } from 'react-redux';
 import { requestPassOTP, resetPass } from '../../helper/axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
