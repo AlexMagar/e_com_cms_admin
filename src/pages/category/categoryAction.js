@@ -16,7 +16,6 @@ export const createNewCategoryAction = (obj) => async (dispatch) =>{
 
 export const getCategoryAction = () => async (dispatch) =>{
     const {status, result} = await getCategory()
-    console.log("from action: ", status, result)
     
     if(status === "success"){
         //mount in the state
