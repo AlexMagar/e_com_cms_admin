@@ -26,8 +26,6 @@ export const loginAdminAction = (obj) => async (dispatch) =>{
 
     const {status, message, token} = await pendingResp;
 
-    console.log("adminAction token: ", token, status, message);
-
     toast[status](message);
 
 
@@ -45,7 +43,6 @@ export const loginAdminAction = (obj) => async (dispatch) =>{
 export const getAdminProfileAction = () => async (dispatch) =>{
     // call the api to get user info
     const {status, user} = await getAdminInfo();
-    console.log("hello there ",user)
 
     //mount the state with the user data
     if(status === "success"){
