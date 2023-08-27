@@ -1,20 +1,17 @@
 import { toast } from "react-toastify"
-import { updateProfile } from "../../helper/axios"
+import { updataeProfile, updateProfilePassword } from "../../helper/axios"
 
+export const updateProfileAction = (_id, fName, lName, address, email, password) =>{
+    console.log(_id, fName, lName, address, email, password)
 
-export const updateProfileAction = async (obj) =>{
+    const pendData = updataeProfile({_id, fName, lName, address, email, password})
+    console.log("Profile Update: ",pendData)
+}
 
-    console.log("Profile Info: ", obj)
+export const updateProfilePasswordAction = async (_id, newPassword, currentPassword) =>{
 
-    const pendingData = updateProfile(obj)
-    toast.promise(pendingData, {
-        pending: "Please await"
-    })
+    console.log(_id, newPassword, currentPassword)
+    const pending = updateProfilePassword({_id, newPassword, currentPassword})
 
-    const {status, message} = await pendingData
-    toast[status](message)
-
-    if(status === "success"){
-        return
-    }
+    console.log("Profile Password: ", pending)
 }
