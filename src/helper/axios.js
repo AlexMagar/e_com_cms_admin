@@ -265,10 +265,20 @@ export const resetPass = (data) =>{
 }
 
 // ============= Profile ============
-export const updateProfile = (data) => {
+export const updataeProfile = (data) => {
+    const obj = {
+        method: 'put',
+        url: adminApi + "/profile",
+        obj: data
+    }
+    console.log(data)
+    return axiosProcessor(obj)
+}
+
+export const updateProfilePassword = (data) => {
     const obj = {
         method: "put",
-        url: adminApi + "/profile",
+        url: adminApi + "/profilePassword",
         obj: data
     }
     return axiosProcessor(obj)
