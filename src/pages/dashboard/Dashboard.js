@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminLayout } from '../../components/layout/AdminLayout'
-import { LineChart } from "recharts";
+import { LineChart, Line, CartesianGrid, XAxis, YAxis } from "recharts";
 
 export const Dashboard = () => {
 
@@ -32,24 +32,18 @@ export const Dashboard = () => {
     },
   ];
 
-  
   return (
     <div>
-        <AdminLayout title="Dashboard">Dashboard</AdminLayout>
-        <div>
-        <LineChart
-      data={data}
-      width={500}
-      height={300}
-      xAxis={20}
-      yAxis={20}
-      className="chart-container"
-      style={{
-        background: "blue",
-        color: "white",
-      }}
-    />
+        <AdminLayout title="Dashboard">
+        <div className='App p-5 b-solid'>
+        <LineChart width={500} height={300} data={data}>
+          <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+          <CartesianGrid stroke='#ccc' />
+          <XAxis dataKey="name" />
+          <YAxis / >
+        </LineChart>
         </div>
+        </AdminLayout>
     </div>
   )
 }
