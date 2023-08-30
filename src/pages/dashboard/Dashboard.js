@@ -1,7 +1,52 @@
 
 import React from "react";
-import { PieChart, Pie, Legend, Tooltip } from "recharts";
+import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer, AreaChart, CartesianGrid, XAxis, YAxis, Area } from "recharts";
 import { AdminLayout } from "../../components/layout/AdminLayout";
+
+const data = [
+  {
+    name: "Page A",
+    uv: 4000,
+    pv: 2400,
+    amt: 2400
+  },
+  {
+    name: "Page B",
+    uv: 3000,
+    pv: 1398,
+    amt: 2210
+  },
+  {
+    name: "Page C",
+    uv: 2000,
+    pv: 9800,
+    amt: 2290
+  },
+  {
+    name: "Page D",
+    uv: 2780,
+    pv: 3908,
+    amt: 2000
+  },
+  {
+    name: "Page E",
+    uv: 1890,
+    pv: 4800,
+    amt: 2181
+  },
+  {
+    name: "Page F",
+    uv: 2390,
+    pv: 3800,
+    amt: 2500
+  },
+  {
+    name: "Page G",
+    uv: 3490,
+    pv: 4300,
+    amt: 2100
+  }
+];
 
 const data01 = [
   { name: "Group A", value: 400 },
@@ -24,30 +69,58 @@ const data02 = [
 export const Dashboard = () => {
   return (
     <AdminLayout title="Dashboard">
-      <div className="border p-3 shadow-lg rounded">
-    <PieChart width={600} height={400}>
-      <Pie
-        dataKey="value"
-        isAnimationActive={false}
-        data={data01}
-        cx={200}
-        cy={200}
-        outerRadius={80}
-        fill="#8884d8"
-        label
-      />
-      <Pie
-        dataKey="value"
-        data={data02}
-        cx={500}
-        cy={200}
-        innerRadius={40}
-        outerRadius={80}
-        fill="#82ca9d"
-      />
-      <Tooltip />
-    </PieChart>
-    </div>
+      <main className="d-flex gap-2">
+        <div className="border p-3 shadow-lg rounded ">
+          <PieChart width={400} height={400}>
+            <Pie
+              dataKey="value"
+              isAnimationActive={true}
+              data={data01}
+              cx={200}
+              cy={200}
+              outerRadius={80}
+              fill="#8884d8"
+              label
+            />
+            <Tooltip />
+          </PieChart>
+        </div>
+        <div className="border p-3 shadow-lg rounded " width={400} height={400}>
+          <ResponsiveContainer >
+            <AreaChart 
+              data={data}
+              margin={{
+                top: 10,
+                right: 30,
+                left: 0,
+                bottom: 0
+              }}
+            >
+
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8"/>
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="border p-3 shadow-lg rounded ">
+          <PieChart width={400} height={400}>
+            <Pie
+              dataKey="value"
+              isAnimationActive={true}
+              data={data01}
+              cx={200}
+              cy={200}
+              outerRadius={80}
+              fill="#8884d8"
+              label
+            />
+            <Tooltip />
+          </PieChart>
+        </div>
+      </main>
     </AdminLayout>
   );
 }
