@@ -7,10 +7,11 @@ import { getAdminDisplayAction } from '../../pages/signin-signup/adminAction'
 export const AdminTable = () => {
     const dispatch = useDispatch()
     
-    useEffect(()=>{dispatch(getAdminDisplayAction())
-    },[dispatch])
-
     const {adminList} = useSelector((state) => state.adminInfo)
+
+    useEffect(()=>{
+      dispatch(getAdminDisplayAction())
+    },[dispatch])
 
   return (
     <div className="mt-5">
