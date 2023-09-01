@@ -18,7 +18,9 @@ const data = [
 export const Dashboard = () => {
 
   const {adminList} = useSelector((state) => state.adminInfo)
-  console.log("From Dashboard: ",adminList)
+  const {categoryList} = useSelector((state) => state.categoryInfo)
+  const {products} = useSelector((state) => state.productInfo)
+  console.log("From Dashboard: ",adminList, categoryList)
 
   const [ activeIndex, setActiveIndex] = useState(0)
   const onPieEnter = useCallback(
@@ -29,7 +31,19 @@ export const Dashboard = () => {
 
   return (
     <AdminLayout title="Dashboard">
-      <main className="d-flex gap-2">
+      <main className="gap-2 d-grid">
+        <div className="topGraphInfo d-flex gap-3">
+          <div className="border shadow-lg p-3 rounded">
+            <p>{adminList.length} Admin found</p>
+          </div>
+          <div className="border shadow-lg p-3 rounded">
+            <p>{products.length} Product found</p>
+          </div>
+          <div className="border shadow-lg p-3 rounded">
+            <p>{categoryList.length} Category found</p>
+          </div>
+        </div>
+        <div className="mainGraphInfo">
         <PieChart width={400} height={400}>
           <Pie
             activeIndex={activeIndex}
@@ -45,6 +59,7 @@ export const Dashboard = () => {
           >
           </Pie>
         </PieChart>
+        </div>
       </main>
     </AdminLayout>
   );
