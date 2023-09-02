@@ -39,3 +39,39 @@
   padding: 1rme;
   border-radius: 10px;
 }
+
+.topGraphInfo{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  margin: 15px 0;
+
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8px 15px;
+  gap: 1rem;
+  border-radius: 10px;
+}
+
+.card:first-child{
+  background: #2962ff;
+}
+.card:nth-child(2){
+  background: #ff6d00;
+}
+.card:nth-child(3){
+  background: #2e7d32;
+}
+
+/* ======== grpah ======== */
+.mainGraphInfo{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 60px;
+  height: 300px;
+}
