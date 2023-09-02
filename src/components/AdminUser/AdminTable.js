@@ -7,7 +7,7 @@ import { getAdminDisplayAction } from '../../pages/signin-signup/adminAction'
 export const AdminTable = () => {
     const dispatch = useDispatch()
     
-    const {adminList} = useSelector((state) => state.adminInfo)
+    const {adminList} = useSelector((state) => state.adminListInfo)
 
     useEffect(()=>{
       dispatch(getAdminDisplayAction())
