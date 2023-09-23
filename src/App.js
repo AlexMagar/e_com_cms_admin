@@ -44,12 +44,12 @@ function App() {
         <Route path='/dashboard' element= {<PrivateRoute><Dashboard /> </PrivateRoute> } />
         <Route path='/category' element={<PrivateRoute><Category /> </PrivateRoute>} />
         <Route path='/product' element={<PrivateRoute><Product /> </PrivateRoute>} />
+        <Route path='/new-product' element={<PrivateRoute><NewProduct /> </PrivateRoute>} />
         <Route path='/payment-option' element={<PrivateRoute><PaymentOption /> </PrivateRoute>} />
         <Route path='/order' element={<PrivateRoute><Order /> </PrivateRoute>} />
         <Route path='/customer' element={<PrivateRoute><Customer /> </PrivateRoute>} />
         <Route path='/admin-user' element={<PrivateRoute><AdminUser /> </PrivateRoute>} />
         <Route path='/profile' element={<PrivateRoute><Profile /> </PrivateRoute>} />
-        <Route path='/new-product' element={<PrivateRoute><NewProduct /> </PrivateRoute>} />
         <Route path='product/edit/:_id' element={<PrivateRoute><EditProduct /> </PrivateRoute>} />
       </Routes>
       <ToastContainer />
