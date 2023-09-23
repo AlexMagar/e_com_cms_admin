@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { postNewAdmin, loginAdmin, getAdminInfo, getNewAccessJWT, getAdminDisplay } from '../../helper/axios';
 import { setAdmin} from "./adminSlice";
 import { setAdminList } from './adminListSlice';
+import axios from 'axios';
 
 export const createNewAdminAction = async (obj) =>{
     const pendingResp = postNewAdmin(obj)
@@ -47,11 +48,8 @@ export const getAdminProfileAction = () => async (dispatch) =>{
 
     //mount the state with the user data
     if(status === "success"){
-        dispatch(setAdmin(user))
-        
-}
-
-
+        dispatch(setAdmin(user))   
+    }
 }
 
 export const autoLogin = () => async (dispatch) =>{

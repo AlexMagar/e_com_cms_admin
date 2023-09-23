@@ -17,7 +17,7 @@ const getRefreshJWT = () => {
 const axiosProcessor = async ({method, url, obj, isPrivate, refreshToken}) => {
     
     const token = refreshToken ? getRefreshJWT() : getAccessJWT()
-
+    console.log("axios test: ". obj)
     const headers = {
         Authorization: isPrivate ? token : null
     }

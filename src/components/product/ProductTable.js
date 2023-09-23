@@ -16,12 +16,12 @@ export const ProductTable = () =>{
 
   return (
     <div className="mt-5">
-        <div className='d-flex justify-content-between mb-3'>
-            <div>{products.length} Products found</div>
-            <div>
-                <Form.Control type='text' placeholder='search by product name'/>
-            </div>
+      <div className='d-flex justify-content-between mb-3'>
+        <div>{products.length} Products found</div>
+        <div>
+            <Form.Control type='text' placeholder='search by product name'/>
         </div>
+      </div>
     <Table striped bordered hover className="text-start">
       <thead>
         <tr>
