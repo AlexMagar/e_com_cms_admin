@@ -4,7 +4,9 @@ import { useSelector } from 'react-redux'
 
 export const SelectCategory = (props) => {
 
-    const { cats } = useSelector((state) => state.catInfo)
+const {categoryList} = useSelector((state) => state.categoryInfo)
+
+    console.log("From the set Category: ", categoryList)
 
   return (
 
@@ -12,7 +14,7 @@ export const SelectCategory = (props) => {
         <Form.Select {...props} >
             <option value=" ">---Select One ----</option>
             {
-                cats.map(({_id, title}) => (
+                categoryList.map(({_id, title}) => (
                     <option key={_id} value={_id} selected={_id === props._id}>
                         {title}
                     </option>
