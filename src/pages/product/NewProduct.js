@@ -72,7 +72,6 @@ export const NewProduct = () => {
         }
     ]
 
-
     const handleOnChange = (e) =>{
         let { checked, name, value } = e.target
 
@@ -85,7 +84,6 @@ export const NewProduct = () => {
         })
     }
 
-   
     const handleOnImageAttached = (e) =>{
         const { files} = e.target
         setImgs(files)
