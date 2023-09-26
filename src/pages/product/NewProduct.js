@@ -4,7 +4,7 @@ import { Button, Form } from 'react-bootstrap'
 import { CustomInput } from '../../components/custom-input/CustomInput'
 import { useDispatch } from 'react-redux'
 import { postNewProductAction } from './productAction'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { SelectCategory } from '../../components/category/SelectCategory'
 
 
@@ -15,6 +15,7 @@ export const NewProduct = () => {
     const dispatch = useDispatch()
     const [form, setForm] = useState(initialState);
     const [imgs, setImgs] = useState([])
+    const navigate = useNavigate()
 
     const inputs = [
         {
@@ -106,7 +107,8 @@ export const NewProduct = () => {
             })
         }
 
-        dispatch(postNewProductAction(formDT));
+        const result =  dispatch(postNewProductAction(formDT));
+        result && navigate("/product")
     }
 
   return (
